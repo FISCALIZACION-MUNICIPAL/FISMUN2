@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(content=~{::section})}">
 
+<head>
+</head>
+
+<body>
+<section>
+    <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Gestión de Usuarios</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a th:href="@{/usuarios/nuevo}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus"></i> Nuevo Usuario
+            </a>
+        </div>
+    </div>
+
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${success}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.id}"></td>
+                <td th:text="${usuario.username}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.apellido}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td>
+                            <span
+                                    th:class="${'badge ' + (usuario.rol.name() == 'ADMIN' ? 'bg-danger' : (usuario.rol.name() == 'INSPECTOR' ? 'bg-primary' : 'bg-secondary'))}"
+                                    th:text="${usuario.rol}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}"
+                       class="btn btn-sm btn-outline-secondary" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <!-- Prevent deleting self or last admin could be a nice feature, but for now just simple delete -->
+                    <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.id})}"
+                       class="btn btn-sm btn-outline-danger"
+                       onclick="return confirm('¿Está seguro de eliminar este usuario?')" title="Eliminar">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 </body>
+
 </html>

@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(content=~{::section})}">
 
+<head>
+</head>
+
+<body>
+<section>
+    <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2" th:text="${usuario.id == null ? 'Nuevo Usuario' : 'Editar Usuario'}">Formulario</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a th:href="@{/usuarios}" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/usuarios/guardar}" method="post" th:object="${usuario}">
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="username" th:field="*{username}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="rawPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="rawPassword" name="rawPassword"
+                                   th:required="${usuario.id == null}"
+                                   th:placeholder="${usuario.id != null ? 'Dejar en blanco para mantener la actual' : ''}">
+                            <div th:if="${usuario.id != null}" class="form-text">Solo ingrese una contraseña si
+                                desea cambiarla.</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellido" th:field="*{apellido}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="rol" class="form-label">Rol</label>
+                            <select class="form-select" id="rol" th:field="*{rol}" required>
+                                <option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}"></option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
+
 </html>
