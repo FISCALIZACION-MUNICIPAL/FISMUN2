@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e1c0b57e33412b1f6299264d307  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="habilitacion_detalle" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<field name="id" class="java.lang.Long"/>
+	<field name="solicitante" class="java.lang.String"/>
+	<field name="dni" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="localidad" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="direccionLocal" class="java.lang.String"/>
+	<field name="dimensiones" class="java.lang.String"/>
+	<field name="esPropietario" class="java.lang.Boolean"/>
+	<field name="tieneElectricidad" class="java.lang.Boolean"/>
+	<field name="tieneGas" class="java.lang.Boolean"/>
+	<field name="estado" class="java.lang.Object"/>
+	<field name="fecha" class="java.time.LocalDate"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="40" uuid="1a33f6a9-0b0e-452f-b394-f1c4494b04d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitud de Habilitación Comercial]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="50" width="555" height="30" uuid="2e3d4d5d-0d0d-5d0d-97f8-98144718d279"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fecha: " + $F{fecha}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="400" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="555" height="20" uuid="7f8c0e1a-5b5e-4c5e-92f3-93690263c724"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Datos del Solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20" uuid="8a9d0e1b-6c6f-4d6f-93f4-94700374d835"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="40" width="445" height="20" uuid="3f4d5d6d-1d1d-6d1d-98f9-99255829d380"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{solicitante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="100" height="20" uuid="9b0e1f2c-7d7d-4e7d-94f5-95811485e946"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI / CUIT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="70" width="170" height="20" uuid="4d5d6d7d-2d2d-7d2d-99f0-00366930d491"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dni} != null ? $F{dni} : "-"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="70" width="80" height="20" uuid="0c1f2d3d-8e8d-4f8d-95f6-96922596f057"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="70" width="175" height="20" uuid="5d6d7d8d-3d3d-8d3d-00f1-11477041d502"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefono} != null ? $F{telefono} : "-"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="20" uuid="1d2d3d4d-9f9d-4d9d-96f7-97033607d168"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="100" width="170" height="20" uuid="6d7d8d9d-4d4d-9d4d-11f2-22588152d613"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{email} != null ? $F{email} : "-"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="100" width="80" height="20" uuid="7d8d9d0d-5d5d-0d5d-22f3-33699263d724"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Localidad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="100" width="175" height="20" uuid="8e9e0e1e-6e6e-1e6e-3304-44700374e835"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{localidad} != null ? $F{localidad} : "-"]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="0" y="140" width="555" height="20" uuid="9f0f1f2f-7f7f-2f7f-4415-55811485f946"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Datos del Local]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="170" width="100" height="20" uuid="a0a1b2b3-8a8a-3a3a-5526-66922596a057"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rubro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="170" width="445" height="20" uuid="b1b2c3c4-9b9b-4b4b-6637-77033607b168"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="200" width="100" height="20" uuid="c2c3d4d5-0c0c-5c5c-7748-88144718c279"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="200" width="445" height="20" uuid="d3d4e5e6-1d1d-6d6d-8859-99255829d380"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{direccionLocal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="230" width="100" height="20" uuid="e4e5f6f7-2e2e-7e7e-9960-00366930e491"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dimensiones:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="230" width="170" height="20" uuid="f5f6a7a8-3f3f-8f8f-0071-11477041f502"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dimensiones} != null ? $F{dimensiones} : "-"]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="0" y="270" width="555" height="20" uuid="a6a7b8b9-4040-9090-1182-22588152d613"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Situación y Servicios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="300" width="100" height="20" uuid="b7b8c9c0-5151-0151-2293-33699263e724"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ocupación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="300" width="170" height="20" uuid="c8c9d0d1-6262-1212-3304-44700374f835"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{esPropietario} != null && $F{esPropietario} ? "Propietario" : "Inquilino"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="300" width="80" height="20" uuid="d9d0e1e2-7373-2323-4415-55811485a946"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Electricidad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="300" width="175" height="20" uuid="e0e1f2f3-8484-3434-5526-66922596b057"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tieneElectricidad} != null && $F{tieneElectricidad} ? "Sí" : "No"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="330" width="80" height="20" uuid="f1f2a3a4-9595-4545-6637-77033607c168"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="330" width="175" height="20" uuid="a2a3b4b5-0606-5656-7748-88144718d279"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tieneGas} != null && $F{tieneGas} ? "Sí" : "No"]]></textFieldExpression>
+			</textField>
+
+			<staticText>
+				<reportElement x="0" y="370" width="100" height="20" uuid="b3b4c5c6-1717-6767-8859-99255829e380"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Actual:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="370" width="445" height="20" uuid="c4c5d6d7-2828-7878-9960-00366930f491"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

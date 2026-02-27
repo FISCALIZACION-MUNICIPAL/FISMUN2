@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(~{::content})}">
+
+<head>
+    <title>Habilitaciones</title>
+</head>
+
+<body>
+    <div th:fragment="content">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Habilitaciones Comerciales</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-file-export"></i> Exportar
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/reportes/exportar/habilitaciones?format=pdf">PDF</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-share-nodes"></i> Compartir
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" target="_blank"
+                                href="https://wa.me/?text=Listado%20de%20Habilitaciones%20Comerciales">
+                                <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="mailto:?subject=Listado%20de%20Habilitaciones&body=Adjunto%20el%20enlace%20al%20listado%20de%20habilitaciones%20comerciales.">
+                                <i class="fa-solid fa-envelope text-primary"></i> Email
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="/habilitaciones/nueva" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-plus"></i> Nueva Habilitación
+                </a>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Solicitante</th>
+                                <th>Rubro/Fantasía</th>
+                                <th>Dirección</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="t : ${habilitaciones}">
+                                <td th:text="${t.id}">1</td>
+                                <td th:text="${t.solicitante}">Juan Perez</td>
+                                <td th:text="${t.descripcion}">Kiosco</td>
+                                <td th:text="${t.direccionLocal}">Av. Siempre Viva 123</td>
+                                <td>
+                                    <span class="badge bg-warning text-dark"
+                                        th:if="${t.estado.name() == 'INSPECCION_PENDIENTE'}">Pendiente</span>
+                                    <span class="badge bg-success"
+                                        th:if="${t.estado.name() == 'FINALIZADO'}">Habilitado</span>
+                                    <span class="badge bg-danger" th:if="${t.estado.name() == 'VENCIDA'}">Vencida</span>
+                                    <span class="badge bg-secondary"
+                                        th:unless="${t.estado.name() == 'INSPECCION_PENDIENTE' or t.estado.name() == 'FINALIZADO' or t.estado.name() == 'VENCIDA'}"
+                                        th:text="${t.estado}">Estado</span>
+                                </td>
+                                <td th:text="${#temporals.format(t.fecha, 'dd/MM/yyyy')}">01/01/2024</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a th:href="@{/habilitaciones/ver/{id}(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-primary" title="Ver">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a th:href="@{/habilitaciones/editar/{id}(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-warning" title="Editar">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a th:href="@{/reportes/exportar/habilitaciones/{id}?format=pdf(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-secondary" title="Exportar PDF"
+                                            target="_blank">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </a>
+                                        <a th:if="${t.estado.name() == 'FINALIZADO'}"
+                                            th:href="@{/reportes/certificado/habilitaciones/{id}(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-success" title="Certificado" target="_blank">
+                                            <i class="fa-solid fa-certificate"></i>
+                                        </a>
+                                        <a th:href="@{/habilitaciones/eliminar/{id}(id=${t.id})}"
+                                            class="btn btn-sm btn-outline-danger" title="Eliminar"
+                                            onclick="return confirm('¿Está seguro de eliminar esta habilitación?');">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false" title="Compartir">
+                                                <i class="fa-solid fa-share-nodes"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" target="_blank"
+                                                        th:href="@{'https://wa.me/?text=Habilitación Comercial: ' + ${t.solicitante} + ' - ' + ${t.descripcion} + ' - ' + ${t.direccionLocal}}">
+                                                        <i class="fa-brands fa-whatsapp text-success"></i> WhatsApp
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        th:href="@{'mailto:?subject=Habilitación Comercial&body=Habilitación Comercial:%0D%0ASolicitante: ' + ${t.solicitante} + '%0D%0ARubro: ' + ${t.descripcion} + '%0D%0ADirección: ' + ${t.direccionLocal}}">
+                                                        <i class="fa-solid fa-envelope text-primary"></i> Email
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(habilitaciones)}">
+                                <td colspan="7" class="text-center text-muted">No hay habilitaciones registradas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

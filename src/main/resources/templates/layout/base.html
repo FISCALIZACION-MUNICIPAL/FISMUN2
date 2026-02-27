@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    th:fragment="html(content)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiscalización Municipal - Las Lajitas</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: #e9ecef;
+            color: #0d6efd;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-white sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5><i class="fa-solid fa-building-columns text-primary"></i> Fiscalización</h5>
+                        <small class="text-muted">Las Lajitas</small>
+                    </div>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">
+                                <i class="fa-solid fa-house me-2"></i> Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/habilitaciones">
+                                <i class="fa-solid fa-store me-2"></i> Habilitaciones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/alcohol">
+                                <i class="fa-solid fa-wine-bottle me-2"></i> Venta Alcohol
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/eventos">
+                                <i class="fa-solid fa-calendar-days me-2"></i> Eventos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/multas">
+                                <i class="fa-solid fa-file-invoice-dollar me-2"></i> Multas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/notificaciones">
+                                <i class="fa-solid fa-envelope me-2"></i> Notificaciones
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Reportes</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reportes">
+                                <i class="fa-solid fa-chart-line me-2"></i> Estadísticas
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h6 sec:authorize="hasRole('ADMIN')"
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Administración</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2" sec:authorize="hasRole('ADMIN')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/usuarios">
+                                <i class="fa-solid fa-users me-2"></i> Usuarios
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="mt-auto p-3 border-top">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-user-circle fa-2x text-secondary me-2"></i>
+                            <div>
+                                <small class="d-block text-muted">Usuario</small>
+                                <strong sec:authentication="name">Admin</strong>
+                            </div>
+                        </div>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2" th:text="${pageTitle}">Dashboard</h1>
+                </div>
+
+                <!-- Content Injection Point -->
+                <div th:replace="${content}"></div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+
+</body>
+
+</html>

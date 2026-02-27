@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+	name="alcohol" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802"
+	leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+	uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<field name="id" class="java.lang.Long" />
+	<field name="solicitante" class="java.lang.String" />
+	<field name="descripcion" class="java.lang.String" />
+	<field name="direccionLocal" class="java.lang.String" />
+	<field name="estado" class="java.lang.Object" />
+	<field name="fecha" class="java.time.LocalDate" />
+	<background>
+		<band splitType="Stretch" />
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="40"
+					uuid="1a33f6a9-0b0e-452f-b394-f1c4494b04d1" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true" />
+				</textElement>
+				<text><![CDATA[Licencias de Venta de Alcohol]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30"
+					uuid="2e3d4d5d-0d0d-5d0d-97f8-98144718d279" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="200" height="30"
+					uuid="3f4d5d6d-1d1d-6d1d-98f9-99255829d380" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[Solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="200" height="30"
+					uuid="4d5d6d7d-2d2d-7d2d-99f0-00366930d491" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[Establecimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="180" height="30"
+					uuid="5d6d7d8d-3d3d-8d3d-00f1-11477041d502" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="0" width="72" height="30"
+					uuid="6d7d8d9d-4d4d-9d4d-11f2-22588152d613" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="732" y="0" width="70" height="30"
+					uuid="7d8d9d0d-5d5d-0d5d-22f3-33699263d724" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" />
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="30"
+					uuid="8e9e0e1e-6e6e-1e6e-3304-44700374e835" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="200" height="30"
+					uuid="9f0f1f2f-7f7f-2f7f-4415-55811485f946" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="200" height="30"
+					uuid="0a1a2b3b-8080-383a-5526-66922596a057" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="180" height="30"
+					uuid="1b2b3c4c-9191-494b-6637-77033607b168" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5" />
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionLocal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="0" width="72" height="30"
+					uuid="2c3c4d5d-0202-505c-7748-88144718c279" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA["" + $F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="732" y="0" width="70" height="30"
+					uuid="3d4d5e6e-1313-616d-8859-99255829d380" />
+				<box>
+					<pen lineWidth="1.0" />
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" />
+				<textFieldExpression><![CDATA[$F{fecha}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

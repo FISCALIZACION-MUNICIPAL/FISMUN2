@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(~{::content})}">
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(~{::content})}">
+
+<head>
+    <title>Reportes</title>
+</head>
+
+<body>
+
+    <div th:fragment="content">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Reportes y Estadísticas</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Compartir</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Total Trámites</div>
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${totalTramites}">0</h2>
+                        <p class="card-text">Registrados en el sistema</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Total Recaudado (Multas)</div>
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${'$ ' + totalRecaudado}">$ 0.00</h2>
+                        <p class="card-text">Multas finalizadas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Trámites Pendientes</div>
+                    <div class="card-body">
+                        <h2 class="card-title" th:text="${totalPendientes}">0</h2>
+                        <p class="card-text">Requieren atención</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Trámites por Tipo</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartTipo"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Estado de los Trámites</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartEstado"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const ctxTipo = document.getElementById('chartTipo').getContext('2d');
+            const chartTipo = new Chart(ctxTipo, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Comercial', 'Alcohol', 'Eventos', 'Multas', 'Notificaciones'],
+                    datasets: [{
+                        label: 'Cantidad',
+                        data: [
+                            /*[[${countComercial}]]*/ 0,
+                            /*[[${countAlcohol}]]*/ 0,
+                            /*[[${countEventos}]]*/ 0,
+                            /*[[${countMultas}]]*/ 0,
+                            /*[[${countNotificaciones}]]*/ 0
+                        ],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+
+            const ctxEstado = document.getElementById('chartEstado').getContext('2d');
+            const chartEstado = new Chart(ctxEstado, {
+                type: 'bar',
+                data: {
+                    labels: ['Pendiente', 'En Proceso', 'Finalizado', 'Vencida'],
+                    datasets: [{
+                        label: 'Cantidad',
+                        data: [
+                            /*[[${countPendiente}]]*/ 0,
+                            /*[[${countEnProceso}]]*/ 0,
+                            /*[[${countFinalizado}]]*/ 0,
+                            /*[[${countVencida}]]*/ 0
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(255, 99, 132, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            /*]]>*/
+        </script>
+    </div>
+
+</body>
+
+</html>

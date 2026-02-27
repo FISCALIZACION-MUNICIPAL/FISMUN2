@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: html(~{::content})}">
+
+<head>
+    <title>Nueva Habilitación</title>
+</head>
+
+<body>
+
+    <div th:fragment="content">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2" th:text="${pageTitle}">Nueva Habilitación Comercial</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form th:action="@{/habilitaciones/guardar}" th:object="${tramite}" method="post">
+                    <input type="hidden" th:field="*{id}">
+
+                    <h5 class="mb-3 text-primary">Datos del Solicitante</h5>
+                    <div class="mb-3">
+                        <label for="solicitante" class="form-label">Nombre Completo / Razón Social</label>
+                        <input type="text" class="form-control" id="solicitante" th:field="*{solicitante}" required
+                            th:disabled="${readonly}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dni" class="form-label">DNI / CUIT</label>
+                        <input type="text" class="form-control" id="dni" th:field="*{dni}" th:disabled="${readonly}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}"
+                            th:disabled="${readonly}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" th:field="*{telefono}"
+                            th:disabled="${readonly}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="localidad" class="form-label">Localidad</label>
+                        <input type="text" class="form-control" id="localidad" th:field="*{localidad}"
+                            th:disabled="${readonly}">
+                    </div>
+
+                    <h5 class="mb-3 text-primary mt-4">Datos del Local</h5>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Nombre de Fantasía / Rubro</label>
+                        <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" required
+                            th:disabled="${readonly}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccionLocal" class="form-label">Dirección del Local</label>
+                        <input type="text" class="form-control" id="direccionLocal" th:field="*{direccionLocal}"
+                            required th:disabled="${readonly}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dimensiones" class="form-label">Dimensiones (m2)</label>
+                        <input type="text" class="form-control" id="dimensiones" th:field="*{dimensiones}"
+                            placeholder="Ej: 40m2" th:disabled="${readonly}">
+                    </div>
+
+                    <h5 class="mb-3 text-primary mt-4">Situación del Inmueble</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Condición de Ocupación</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="esPropietario" id="propietario"
+                                value="true" th:field="*{esPropietario}" th:disabled="${readonly}">
+                            <label class="form-check-label" for="propietario">Propietario</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="esPropietario" id="inquilino"
+                                value="false" th:field="*{esPropietario}" th:disabled="${readonly}">
+                            <label class="form-check-label" for="inquilino">Inquilino</label>
+                        </div>
+                    </div>
+
+                    <h5 class="mb-3 text-primary mt-4">Servicios</h5>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="tieneElectricidad"
+                            th:field="*{tieneElectricidad}" th:disabled="${readonly}">
+                        <label class="form-check-label" for="tieneElectricidad">Posee Red Eléctrica</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="tieneGas" th:field="*{tieneGas}"
+                            th:disabled="${readonly}">
+                        <label class="form-check-label" for="tieneGas">Posee Gas Domiciliario</label>
+                    </div>
+
+                    <h5 class="mb-3 text-primary mt-4">Estado del Trámite</h5>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" th:field="*{estado}" th:disabled="${readonly}">
+                            <option
+                                th:each="estadoOption : ${T(com.laslajitas.fiscalizacion.model.EstadoTramite).values()}"
+                                th:value="${estadoOption}" th:text="${estadoOption}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                        <a href="/habilitaciones" class="btn btn-secondary me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-primary" th:unless="${readonly}">Guardar
+                            Habilitación</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
